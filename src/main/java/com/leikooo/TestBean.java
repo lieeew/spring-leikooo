@@ -5,7 +5,7 @@ import org.spring.annotation.Component;
 /**
  * @author leikooo
  */
-@Component
+//@Component
 public class TestBean {
 	private String name = "spring-test";
 

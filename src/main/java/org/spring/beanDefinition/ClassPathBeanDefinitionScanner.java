@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.spring.annotation.ComponentScan;
 import org.spring.annotation.Scope;
+import org.spring.annotation.Service;
 import org.spring.applicationContext.AnnotationConfigApplicationContext;
 import org.spring.beanFactory.DefaultListableBeanFactory;
 
@@ -60,8 +61,14 @@ public class ClassPathBeanDefinitionScanner {
                     String scope = beanDefinition.getClazz().getAnnotation(Scope.class).value();
                     beanDefinition.setScope(scope);
                 }
-                // 通知进行注册逻辑
-                BeanDefinitionReaderUtils.registerBeanDefinition(beanDefinition, this.registry);
+                if (aClass.isAnnotationPresent(Service.class)) {
+                    if ("singleton".equals(beanDefinition.getScope())) {
+                        DefaultListableBeanFactory defaultListableBeanFactory = ((AnnotationConfigApplicationContext) registry).obtainBeanFactory();
+                        defaultListableBeanFactory.getBeanDefinitionNames().add(Introspector.decapitalize(beanDefinition.getClazz().getSimpleName()));
+                    }
+                    // 通知进行注册逻辑
+                    BeanDefinitionReaderUtils.registerBeanDefinition(beanDefinition, this.registry);
+                }
                 return;
             } catch (ClassNotFoundException e) {
                 log.error(e.getMessage());

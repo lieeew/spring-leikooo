@@ -14,7 +14,5 @@ public interface BeanDefinitionRegistry {
 
     Object getBean(String beanName);
 
-    void doScan();
-
-    void doRegister();
+    void preInstantiateSingletons();
 }

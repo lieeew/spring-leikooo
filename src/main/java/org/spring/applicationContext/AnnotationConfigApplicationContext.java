@@ -48,6 +48,6 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 
     @Override
     protected void invokeBeanFactoryPostProcessors(org.spring.beanFactory.BeanDefinitionRegistry beanFactory) {
-        this.scanner.doScan();
+        this.scanner.scan();
     }
 }

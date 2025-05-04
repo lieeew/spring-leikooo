@@ -29,16 +29,16 @@ public abstract class GenericApplicationContext {
         DefaultListableBeanFactory beanFactory = obtainBeanFactory();
         // 扫描 appConfig 指定的 bean 目录下进行扫描
         invokeBeanFactoryPostProcessors(beanFactory);
-        // Register bean processors that intercept bean creation.
-        registerBeanPostProcessors(beanFactory);
+        // Instantiate all remaining (non-lazy-init) singletons.
+        finishBeanFactoryInitialization(beanFactory);
     }
 
-    private void registerBeanPostProcessors(DefaultListableBeanFactory beanFactory) {
-        beanFactory.doRegister();
+    private void finishBeanFactoryInitialization(DefaultListableBeanFactory beanFactory) {
+        this.getBeanFactory().preInstantiateSingletons();
     }
 
     protected void invokeBeanFactoryPostProcessors(BeanDefinitionRegistry beanFactory) {
-        beanFactory.doScan();
+        throw new UnsupportedOperationException();
     }
 
     protected DefaultListableBeanFactory obtainBeanFactory() {
