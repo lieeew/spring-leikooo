@@ -16,6 +16,5 @@ public class BeanDefinitionReaderUtils {
         assert simpleName.isEmpty() : "bean name must not be empty";
         String beanName = Introspector.decapitalize(simpleName);
         registry.registerBeanDefinition(beanName, beanDefinition);
-
     }
 }

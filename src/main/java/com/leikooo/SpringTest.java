@@ -1,5 +1,6 @@
 package com.leikooo;
 
+import com.leikooo.bean.TestService;
 import com.leikooo.config.AppConfig;
 import org.spring.applicationContext.AnnotationConfigApplicationContext;
 
@@ -13,6 +14,7 @@ public class SpringTest {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext applicationContext
                 = new AnnotationConfigApplicationContext(AppConfig.class);
-        TestBean testBean = (TestBean) applicationContext.getBean("testBean");
+        TestService testBean = (TestService) applicationContext.getBean("testService");
+        System.out.println("testBean = " + testBean.getName());
     }
 }

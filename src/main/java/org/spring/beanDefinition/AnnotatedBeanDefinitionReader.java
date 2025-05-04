@@ -11,6 +11,10 @@ public class AnnotatedBeanDefinitionReader {
 
     private final BeanDefinitionRegistry registry;
 
+    public AnnotatedBeanDefinitionReader(BeanDefinitionRegistry registry) {
+        this.registry = registry;
+    }
+
     /**
      * 注册我们 扫描路径 到 beanFactory 里面
      * @param componentClass 扫描路径的类
@@ -34,6 +38,6 @@ public class AnnotatedBeanDefinitionReader {
             beanDefinition.setScope(scope);
         }
         // 通知进行注册逻辑
-        BeanDefinitionReaderUtils.registerBeanDefinition(beanDefinition, this.registry)
+        BeanDefinitionReaderUtils.registerBeanDefinition(beanDefinition, this.registry);
     }
 }
